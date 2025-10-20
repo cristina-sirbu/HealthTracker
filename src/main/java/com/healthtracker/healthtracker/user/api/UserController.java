@@ -1,6 +1,7 @@
 package com.healthtracker.healthtracker.user.api;
 
 import com.healthtracker.healthtracker.common.ApiMessage;
+import com.healthtracker.healthtracker.common.FreshnessToken;
 import com.healthtracker.healthtracker.user.api.dto.LoginRequest;
 import com.healthtracker.healthtracker.user.app.UserService;
 import com.healthtracker.healthtracker.user.domain.User;
@@ -25,7 +26,11 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody UserRequest userRequest) {
         User u = userService.register(userRequest.username, userRequest.password);
-        return ResponseEntity.ok(new ApiMessage("registered", u.getId(), u.getUsername()));
+
+        String token = FreshnessToken.create(60); // 60 seconds read-your-writes
+        return ResponseEntity.ok()
+                .header("X-Read-Primary-Until", token)
+                .body(new ApiMessage("registered", u.getId(), u.getUsername()));
     }
 
     @PostMapping("/login")
