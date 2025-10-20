@@ -31,3 +31,15 @@ curl -X POST http://localhost:8080/users/login \
 -H "Content-Type: application/json" \
 -d '{"username":"alice","password":"pass"}'
 ```
+
+Create medication.
+```shell
+curl -i -X POST "http://localhost:8080/users/1/medications" \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Ibuprofen","form":"tablet","strength":"200mg"}'
+```
+
+List medications.
+```shell
+curl -i "http://localhost:8080/users/1/medications"
+```
