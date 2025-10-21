@@ -8,7 +8,7 @@ spring:
     password:
   jpa:
     hibernate:
-      ddl-auto: update   # for scaffolding; later switch to Flyway
+      ddl-auto: validate # Hibernate checks schema but doesn’t recreate it
     show-sql: true
   h2:
     console:
