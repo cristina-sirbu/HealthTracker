@@ -102,3 +102,52 @@ When data repeats (like user names or medication names stored in multiple places
   * Used for filters, pagination, or optional settings:
     * ?page=2&limit=20
     * ?sort=name
+
+## What does this do? @SpringBootTest(classes = HealthtrackerApplication.class)
+Start my full Spring Boot application context for tests.
+
+**Interview response**: “@SpringBootTest loads a real application context so I can test my components end-to-end.
+Specifying classes = … ensures it starts from my main configuration, even if the test package isn’t under the same root.”
+
+## What does this do? @AutoConfigureMockMvc
+Inject a real MockMvc instance so I can simulate HTTP calls — without running a real server.
+
+**Interview response**: “@AutoConfigureMockMvc gives me a mock HTTP layer on top of the full Spring context.
+It’s ideal for controller integration tests because it exercises request mapping, validation, and error handling end-to-end.”
+
+## How to narrow the context for faster tests? @SpringBootTest vs @WebMvcTest
+**@SpringBootTest** — “Full integration”
+
+This starts the entire application context:
+* All controllers, services, repositories, and configurations.
+* It connects to the real database (or H2, depending on your config).
+* It runs your app end-to-end, just without an external server.
+
+Best when you want to test:
+* Real DB interactions (repositories, Flyway, etc.)
+* How multiple layers work together
+* Application startup (e.g., migrations, security filters)
+
+Downside:
+* Slower to start (seconds vs milliseconds)
+* Harder to isolate bugs because everything loads
+
+**@WebMvcTest** — “Controller-only slice”
+
+This starts only the web layer:
+* Loads controllers, validation, exception handlers, Jackson, etc.
+* Does not load service beans or repositories — you mock them instead.
+* No database, no migrations — just HTTP request handling logic.
+
+Best when you want to:
+* Test just HTTP → controller → response JSON
+* Verify validation, routing, error handling
+* Run fast, hundreds per second
+
+Downside:
+* Doesn’t verify DB or service logic
+* You must mock everything else
+
+**Interview response**: I use @SpringBootTest for full-stack integration tests — verifying controllers, services, and repositories together.
+I use @WebMvcTest when I only want to test controller behavior in isolation, mocking the service layer.
+It’s a trade-off between confidence and speed. When using @WebMvcTest, I mock any dependencies that live outside the web layer using @MockBean, because Spring only scans controllers and their direct configuration classes.”
