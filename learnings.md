@@ -155,3 +155,12 @@ It’s a trade-off between confidence and speed. When using @WebMvcTest, I mock 
 # What does `mvn verify -B` means?
 
 mvn verify -B = “Run the full build and tests automatically, no user input, CI-friendly.”
+
+# What does @Mock and @InjectMocks do?
+* @Mock — to create mock objects
+* @InjectMocks — to automatically inject those mocks into your class under test
+
+# Difference between `assert` and `verify`?
+* `assert` checks the result or state of your method under test; used to confirm what your method returned
+* `verify` checks interation with dependencies; used to confirm how it behaved toward other classes (like mocks)
+
