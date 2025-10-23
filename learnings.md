@@ -151,3 +151,7 @@ Downside:
 **Interview response**: I use @SpringBootTest for full-stack integration tests — verifying controllers, services, and repositories together.
 I use @WebMvcTest when I only want to test controller behavior in isolation, mocking the service layer.
 It’s a trade-off between confidence and speed. When using @WebMvcTest, I mock any dependencies that live outside the web layer using @MockBean, because Spring only scans controllers and their direct configuration classes.”
+
+# What does `mvn verify -B` means?
+
+mvn verify -B = “Run the full build and tests automatically, no user input, CI-friendly.”

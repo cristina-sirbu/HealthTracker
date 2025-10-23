@@ -1,5 +1,7 @@
 # Health Tracker
 
+[![CI](https://github.com/cristina-sirbu/HealthTracker/actions/workflows/ci.yml/badge.svg)](https://github.com/cristina-sirbu/HealthTracker/actions/workflows/ci.yml)
+
 ## Run the app
 
 ```shell
