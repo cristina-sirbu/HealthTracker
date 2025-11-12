@@ -45,3 +45,8 @@ List medications.
 ```shell
 curl -i "http://localhost:8080/users/1/medications"
 ```
+
+Export medications: (format can be `json` or `csv`)
+```shell
+curl -i "http://localhost:8080/users/1/medications/exports?format=json"
+```

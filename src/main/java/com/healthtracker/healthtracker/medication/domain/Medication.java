@@ -2,7 +2,9 @@ package com.healthtracker.healthtracker.medication.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.OffsetDateTime;
@@ -14,6 +16,8 @@ import java.time.OffsetDateTime;
         name = "medications",
         uniqueConstraints = @UniqueConstraint(columnNames = {"user_id","name"})
 )
+@AllArgsConstructor
+@NoArgsConstructor
 public class Medication {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
