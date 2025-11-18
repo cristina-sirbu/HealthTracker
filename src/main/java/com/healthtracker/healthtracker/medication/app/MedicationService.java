@@ -3,6 +3,9 @@ package com.healthtracker.healthtracker.medication.app;
 import com.healthtracker.healthtracker.medication.domain.Medication;
 import com.healthtracker.healthtracker.medication.infra.MedicationRepository;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,5 +39,10 @@ public class MedicationService {
 
     public List<Medication> getMedicationsByUserId(Long userId) {
         return medicationRepository.findByUserIdOrderByCreatedAtDesc(userId);
+    }
+
+    public Page<Medication> getMedicationByUserId(Long userId, int limit, int offset) {
+        Pageable pageable = PageRequest.of(offset/limit, limit);
+        return medicationRepository.findByUserId(userId, pageable);
     }
 }

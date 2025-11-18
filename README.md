@@ -21,7 +21,7 @@ curl -X POST http://localhost:8080/users/register \
 Duplicate register (should return 400 with our IllegalArgumentException)
 
 ```shell
-curl -X POST http://localhost:8080/users/register \
+curl -i -X POST http://localhost:8080/users/register \
 -H "Content-Type: application/json" \
 -d '{"username":"alice","password":"pass"}'
 ```
@@ -29,7 +29,7 @@ curl -X POST http://localhost:8080/users/register \
 Login (should be 200 OK after first register)
 
 ```shell
-curl -X POST http://localhost:8080/users/login \
+curl -i -X POST http://localhost:8080/users/login \
 -H "Content-Type: application/json" \
 -d '{"username":"alice","password":"pass"}'
 ```
@@ -43,7 +43,7 @@ curl -i -X POST "http://localhost:8080/users/1/medications" \
 
 List medications.
 ```shell
-curl -i "http://localhost:8080/users/1/medications"
+curl -i "http://localhost:8080/users/1/medications?limit=2&offset=0"
 ```
 
 Export medications: (format can be `json` or `csv`)
