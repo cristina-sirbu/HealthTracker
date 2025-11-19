@@ -31,6 +31,10 @@ public class MedicationController {
             @PathVariable  Long userId,
             @RequestParam(defaultValue = "10") int limit,
             @RequestParam(defaultValue = "0") int offset) {
+        if (limit <= 0 || limit > 100 || offset < 0) {
+            return ResponseEntity.badRequest().build();
+        }
+
         Page<Medication> page = medicationService.getMedicationByUserId(userId, limit, offset);
         List<MedicationResponse> items = page.getContent()
                 .stream()
